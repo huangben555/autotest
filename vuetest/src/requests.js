@@ -1,6 +1,6 @@
 import request from "request";
 
-async function req(url, method, requestData) {
+function req(url, method, requestData) {
     request({
             url: url,
             method: method,
@@ -15,6 +15,7 @@ async function req(url, method, requestData) {
                 console.log("responseData: ", body); // 请求成功的处理逻辑
             }
         });
+    return req;
 }
 
 export default req;

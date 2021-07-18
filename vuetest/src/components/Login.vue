@@ -17,17 +17,14 @@ import request from "request";
 export default defineComponent({
   name: "Login",
   setup() {
-    return {
-      requestData: reactive(
+    const requestData = reactive(
           {
             account: "",
             password: "",
           }
-      ),
-    };
-  },
-  methods: {
-    submit() {
+      );
+
+    const submit = ()=> {
       request({
             url: "http://www.mockbin.com/hars",
             method: "POST",
@@ -35,14 +32,23 @@ export default defineComponent({
             headers: {
                 "content-type": "application/json",
             },
-            body: JSON.stringify(this.requestData)
+            body: JSON.stringify(requestData)
         },
-        function (error, response, body) {
+        function (error, response) {
             if (!error && response.statusCode == 200) {
-                console.log("responseData: ", body); // 请求成功的处理逻辑
+                console.log("response.statusCode: ", response.statusCode); // 请求成功的处理逻辑
+                requestData.account = "graesegesgr";
             }
         });
-    }
+    };
+
+    return {
+      requestData,
+      submit,
+    };
+  },
+  methods: {
+
   }
 })
 </script>
