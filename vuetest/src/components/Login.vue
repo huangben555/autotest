@@ -5,26 +5,43 @@
     <label style="margin-left: 200px;">请输入密码：</label>
     <el-input class="input_account" style="width: 200px;" v-model="requestData.password"></el-input>
     <br>
-    <el-button style="margin-left: 240px; margin-top: 50px;" v-on:click="submit">提交</el-button>
+    <el-button style="margin-left: 240px; margin-top: 50px;" v-on:click="submit()">提交</el-button>
   </div>
 </template>
 
 <script lang="js">
 import {defineComponent, reactive} from "vue";
-import requestPost from "../requests";
+import request from "request";
+
 
 export default defineComponent({
   name: "Login",
   setup() {
     return {
       requestData: reactive(
-          {account: "", password: ""}
+          {
+            account: "",
+            password: "",
+          }
       ),
     };
   },
   methods: {
     submit() {
-      requestPost("http://www.mockbin.com/har", this.requestData);
+      request({
+            url: "http://www.mockbin.com/hars",
+            method: "POST",
+            json: true,
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(this.requestData)
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log("responseData: ", body); // 请求成功的处理逻辑
+            }
+        });
     }
   }
 })
