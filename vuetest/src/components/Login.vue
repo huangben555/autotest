@@ -13,6 +13,7 @@
 
 <script lang="js">
 import {defineComponent, reactive} from "vue";
+import request from "request";
 
 export default defineComponent({
   name: "Login",
@@ -27,23 +28,20 @@ export default defineComponent({
 
     const submit = () => {
       requestData.buttonLoading = true;
-      this.request({
-            url: "http://www.mockbin.com/hars",
-            method: "POST",
-            json: true,
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(requestData)
-          },
-          function (error, response) {
-            if (!error && response.statusCode == 200) {
-              console.log("response.statusCode: ", response.statusCode); // 请求成功的处理逻辑
-            }
-            setTimeout(function () {
-              requestData.buttonLoading = false;
-            }, 6000)
-          });
+      request({
+    url: "http://10.0.0.7:9999/login/",
+    method: "POST",
+    json: true,
+    headers: {
+        "content-type": "application/json",
+    },
+    body: JSON.stringify(requestData)
+}, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+        console.log(body) // 请求成功的处理逻辑
+    }
+});
+
     };
 
     return {
