@@ -9,21 +9,21 @@ class Handler(tornado.web.RequestHandler):
         self.set_default_header()
 
     def set_default_header(self):
-        self.set_header('Access-Control-Allow-Origin', '*')
-        self.set_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "Content-Type")
 
     def post(self):
-        print('request successfully')
-        self.finish(json.dumps({"Status": 'OK'}))
+        self.finish(json.dumps({"Status": "OK"}))
 
     def options(self):
         pass
 
 
 app = tornado.web.Application([
-    (r'^/login/', Handler)
+    (r"^/login/", Handler)
 ])
 
 app.listen(9999)
 
-tornado.ioloop.IOLoop.current().start()
+if __name__ == "__main__":
+    tornado.ioloop.IOLoop.current().start()
