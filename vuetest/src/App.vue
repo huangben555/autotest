@@ -7,7 +7,11 @@
       <router-link to="Login">Login</router-link>
     </li>
   </ul>
-  <router-view></router-view>
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component"></component>
+    </keep-alive>
+  </router-view>
 </template>
 
 <script lang="js">
