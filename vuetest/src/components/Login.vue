@@ -4,8 +4,9 @@
     <el-input style="width: 200px;" v-model="account"></el-input>
     <label style="margin-left: 200px;">请输入密码：</label>
     <el-input style="width: 200px;" v-model="password"></el-input>
+    <p style="margin-left: 780px; margin-top: 50px;">{{ requestStatus }}</p>
     <br>
-    <el-button style="margin-left: 290px; margin-top: 50px;" v-on:click="submit()" :loading="buttonLoading">
+    <el-button style="margin-left: 400px; padding-top: 20px;" v-on:click="submit()" :loading="buttonLoading">
       提交
     </el-button>
   </div>
@@ -23,33 +24,38 @@ export default defineComponent({
       password: "",
     });
 
-    const controlStatus = reactive({
+    const Status = reactive({
       buttonLoading: false,
+      requestStatus: "未进行",
     });
 
     const submit = () => {
-      controlStatus.buttonLoading = true;
+      Status.buttonLoading = true;
+      Status.requestStatus = "请求中";
       request({
-        url: "http://10.0.0.7:9999/login/",
+        url: "http://192.168.43.187:9999/login/",
         method: "POST",
         json: true,
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(requestData)
-      }, function (error, response, body) {
+      }, function (error, response) {
         if (!error && response.statusCode == 200) {
-          console.log(body) // 请求成功的处理逻辑
+          setTimeout(function () {
+            Status.buttonLoading = false;
+            Status.requestStatus = "请求成功";
+          }, 6000);
         }
-        setTimeout(function () {
-          controlStatus.buttonLoading = false;
-        }, 6000)
+        else {
+          Status.requestStatus = "请求失败";
+        }
       });
     };
 
     return {
       ...toRefs(requestData),
-      ...toRefs(controlStatus),
+      ...toRefs(Status),
       submit,
     };
   },

@@ -29,7 +29,7 @@ export default defineComponent({
       requestData.arrayData.push({
         data: "",
       });
-    }
+    };
 
     const del = (index) => {
       if (requestData.arrayData.length <= 1){
@@ -38,7 +38,7 @@ export default defineComponent({
       else {
         requestData.arrayData.splice(index, 1)
       }
-    }
+    };
 
     return {
       ...toRefs(requestData),

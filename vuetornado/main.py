@@ -1,6 +1,7 @@
 import tornado.web
 import tornado.ioloop
 import json
+import logging
 
 
 class Handler(tornado.web.RequestHandler):
