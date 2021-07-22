@@ -37,7 +37,7 @@ export default defineComponent({
         method: "POST",
         json: true,
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(requestData)
       }, function (error, response) {
@@ -46,9 +46,11 @@ export default defineComponent({
             Status.buttonLoading = false;
             Status.requestStatus = "请求成功";
           }, 6000);
-        }
-        else {
-          Status.requestStatus = "请求失败";
+        } else {
+          setTimeout(function () {
+            Status.buttonLoading = false;
+            Status.requestStatus = "请求失败";
+          }, 6000);
         }
       });
     };

@@ -1,8 +1,7 @@
 import tornado.web
 import tornado.ioloop
 import json
-import logging
-
+from intergration.logHandle import NbLog
 
 class Handler(tornado.web.RequestHandler):
 
@@ -12,13 +11,15 @@ class Handler(tornado.web.RequestHandler):
     def set_default_header(self):
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Access-Control-Allow-Headers", "Content-Type")
+        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
 
     def post(self):
+        request_data = self.request.body
+        NbLog().info(request_data)
         self.finish(json.dumps({"Status": "OK"}))
 
     def options(self):
         pass
-
 
 app = tornado.web.Application([
     (r"^/login/", Handler)
