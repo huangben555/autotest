@@ -6,7 +6,7 @@
     <el-input style="width: 200px;" v-model="password"></el-input>
     <p style="margin-left: 780px; margin-top: 50px;">{{ requestStatus }}</p>
     <br>
-    <el-button style="margin-left: 400px; padding-top: 20px;" v-on:click="submit()" :loading="buttonLoading">
+    <el-button style="margin-left: 400px; margin-top: 20px;" v-on:click="submit()" :loading="buttonLoading">
       提交
     </el-button>
   </div>
