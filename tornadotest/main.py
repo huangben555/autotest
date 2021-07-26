@@ -1,10 +1,12 @@
 import tornado.web
 import tornado.ioloop
-import json
+import json, time
 from intergration.logHandle import NbLog
+from tornado.httpclient import AsyncHTTPClient
+from handles.handle_demo import Handler
 
 
-class Handler(tornado.web.RequestHandler):
+class BlockHandler(tornado.web.RequestHandler):
 
     def initialize(self):
         self.set_default_header()
@@ -27,7 +29,8 @@ class Handler(tornado.web.RequestHandler):
 
 
 app = tornado.web.Application([
-    (r"^/login/", Handler)
+    (r"^/login/", Handler),
+    (r"^/block/", BlockHandler),
 ])
 
 app.listen(9999)

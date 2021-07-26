@@ -1,6 +1,7 @@
 from nb_log import LogManager
 import os
 
+
 class NbLog:
     def __init__(self):
         self.logger = LogManager('simple').get_logger_and_add_handlers\

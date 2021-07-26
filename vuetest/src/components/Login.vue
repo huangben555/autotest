@@ -33,16 +33,17 @@ export default defineComponent({
       Status.buttonLoading = true;
       Status.requestStatus = "请求中";
       request({
-        url: "http://192.168.43.187:9999/login/",
+        url: "http://10.0.0.7:9999/login/",
         method: "POST",
         json: true,
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(requestData)
-      }, function (error, response) {
-        if (!error && response.statusCode == 200) {
+      }, function (error, response, body) {
+        if (!error && response.statusCode == 200 && body != null) {
           setTimeout(function () {
+            console.log(JSON.stringify(body))
             Status.buttonLoading = false;
             Status.requestStatus = "请求成功";
           }, 6000);
