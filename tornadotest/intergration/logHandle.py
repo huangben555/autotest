@@ -4,7 +4,7 @@ import os
 
 class NbLog:
     def __init__(self):
-        self.logger = LogManager('simple').get_logger_and_add_handlers\
+        self.logger = LogManager('vueRequest').get_logger_and_add_handlers\
             (log_path=os.path.join(os.path.abspath("."), "logs"), log_filename="日志名称")
 
     def error(self, msg):

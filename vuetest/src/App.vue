@@ -1,10 +1,10 @@
 <template>
   <ul class="header">
     <li>
-      <router-link to="Home">Home</router-link>
+      <router-link to="/Home">Home</router-link>
     </li>
     <li>
-      <router-link to="Login">Login</router-link>
+      <router-link to="/Login">Login</router-link>
     </li>
   </ul>
   <router-view v-slot="{ Component }">
