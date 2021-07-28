@@ -5,7 +5,7 @@ import Login from "./components/Login";
 const routers = createRouter({
     history: createWebHistory(),
     routes:[
-        {path: '/',  redirect: '/Home'},
+        {path: '/dist/',  redirect: '/Home'},
         {path: '/Login', component: Login},
         {path: '/Home',  component: Home},
     ]
