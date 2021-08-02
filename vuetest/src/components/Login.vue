@@ -14,7 +14,8 @@
 
 <script lang="js">
 import {defineComponent, reactive, toRefs} from "vue";
-import request from "request";
+import axios from "axios";
+import {postHeaders} from "../intergration/requestHeaders";
 
 export default defineComponent({
   name: "Login",
@@ -29,31 +30,30 @@ export default defineComponent({
       requestStatus: "未进行",
     });
 
+    const requestConfig = {
+      url: "http://192.168.43.187:9999/login/",
+      method: "post",
+      headers: postHeaders,
+      data: JSON.stringify(requestData),
+    };
+
     const submit = () => {
       Status.buttonLoading = true;
       Status.requestStatus = "请求中";
-      request({
-        url: "http://10.0.0.7:9999/login/",
-        method: "POST",
-        json: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestData)
-      }, function (error, response, body) {
-        if (!error && response.statusCode == 200 && body != null) {
-          setTimeout(function () {
-            console.log(JSON.stringify(body))
+      axios.request(requestConfig)
+          .then(function (response) {
+            if (response.status == 200 && response.data != null) {
+              Status.requestStatus = "请求成功";
+            } else {
+              Status.requestStatus = "请求失败";
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+          .finally(function (){
             Status.buttonLoading = false;
-            Status.requestStatus = "请求成功";
-          }, 6000);
-        } else {
-          setTimeout(function () {
-            Status.buttonLoading = false;
-            Status.requestStatus = "请求失败";
-          }, 6000);
-        }
-      });
+          })
     };
 
     return {
