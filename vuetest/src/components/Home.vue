@@ -15,6 +15,7 @@
 
 <script lang="js">
 import {defineComponent, reactive, toRefs} from "vue";
+import {getTaskNo} from "../intergration/getNowTime"
 
 export default defineComponent({
   name: "Home",
@@ -22,6 +23,7 @@ export default defineComponent({
   setup() {
     const requestData = reactive(
         {
+          taskNo: "",
           arrayData: [
             {
               table: "",
@@ -66,8 +68,9 @@ export default defineComponent({
     };
 
     const submit = () => {
-      console.log(requestData)
-    }
+      requestData.taskNo = getTaskNo();
+      console.log(requestData);
+    };
 
     return {
       ...toRefs(requestData),

@@ -1,6 +1,9 @@
 <template>
   <div class="Login_class" style="margin-top: 50px">
-    <label style="margin-left: 50px;">请输入账号：</label>
+    <v-person></v-person>
+  </div>
+  <div class="Login_class" style="margin-top: 50px">
+    <label style="margin-top: 100px; margin-left: 50px;">请输入账号：</label>
     <el-input style="width: 200px;" v-model="account"></el-input>
     <label style="margin-left: 200px;">请输入密码：</label>
     <el-input style="width: 200px;" v-model="password"></el-input>
@@ -16,11 +19,18 @@
 import {defineComponent, reactive, toRefs} from "vue";
 import axios from "axios";
 import {postHeaders} from "../intergration/requestHeaders";
+import Person from "./Person";
 
 export default defineComponent({
   name: "Login",
+
+  components:{
+  "v-person": Person
+},
+
   setup() {
     const requestData = reactive({
+      name: "",
       account: "",
       password: "",
     });
@@ -31,10 +41,10 @@ export default defineComponent({
     });
 
     const requestConfig = {
-      url: "http://192.168.43.187:9999/login/",
+      url: "http://127.0.0.1:9999/login/",
       method: "post",
       headers: postHeaders,
-      data: JSON.stringify(requestData),
+      data: requestData,
     };
 
     const submit = () => {
@@ -62,7 +72,6 @@ export default defineComponent({
       submit,
     };
   },
-  methods: {}
 })
 </script>
 
