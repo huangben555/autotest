@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 25px">
     <div v-for="(item, index) in arrayData" :key="index">
       <el-input v-model="item.table" style="margin-left: 20px; width: 200px"></el-input>
       <el-select v-model="item.menu" placeholder="请选择" style="margin-left: 20px">
