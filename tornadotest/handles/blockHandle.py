@@ -3,12 +3,12 @@ import sys
 
 sys.path.append('C:\\PycharmProjects\\autoTest')
 
-from tornadotest.intergration.logHandle import NbLog
+from tornadotest.intergration.logWriter import NbLog
 from tornado.httpclient import AsyncHTTPClient
-from tornadotest.handles.main_handle import MainHandler
+from tornadotest.handles.BaseHandle import MainHandler
 
 
-class Handler(MainHandler):
+class BlockHandler(MainHandler):
 
     async def post(self):
         client = AsyncHTTPClient()

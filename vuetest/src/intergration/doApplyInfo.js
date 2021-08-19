@@ -1,8 +1,8 @@
 import {createStore} from "vuex";
 
-const applyInfo = createStore({
+const doApplyInfo = createStore({
     state: {
-        applyNo: "1",
+        applyNo: "",
     },
     mutations: {
         setData(state, msg){
@@ -11,4 +11,4 @@ const applyInfo = createStore({
     },
 });
 
-export {applyInfo}
+export {doApplyInfo}

@@ -21,15 +21,17 @@ import {defineComponent, reactive, toRefs} from "vue";
 import axios from "axios";
 import {useStore} from "vuex";
 import {postHeaders} from "../intergration/requestHeaders";
+import {getTaskNo} from "../intergration/getTaksNo"
 
 export default defineComponent({
   name: "Login",
 
   setup() {
-    const applyInfo = useStore();
+    const doApplyInfo = useStore();
 
     const requestData = reactive({
-      applyNo: applyInfo.state.applyNo,
+      taskNo: "",
+      applyNo: doApplyInfo.state.applyNo,
       account: "",
       password: "",
     });
@@ -40,14 +42,14 @@ export default defineComponent({
     });
 
     const requestConfig = {
-      url: "http://192.168.43.187:9999/login/",
+      url: "http://127.0.0.1:9999/login/",
       method: "post",
       headers: postHeaders,
       data: requestData,
     };
 
     const submit = () => {
-      console.log(requestData)
+      requestData.taskNo = getTaskNo();
       Status.buttonLoading = true;
       Status.requestStatus = "请求中";
       axios.request(requestConfig)

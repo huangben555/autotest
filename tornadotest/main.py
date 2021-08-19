@@ -1,11 +1,11 @@
 import tornado.web
 import tornado.ioloop
-from handles.demo_handle import Handler
-from handles.block_handle import BlockHandler
+from handles.demoHandle import DemoHandler
+from handles.blockHandle import BlockHandler
 
 
 app = tornado.web.Application([
-    (r"^/login/", Handler),
+    (r"^/login/", DemoHandler),
     (r"^/block/", BlockHandler),
 ])
 

@@ -15,7 +15,7 @@
 
 <script lang="js">
 import {defineComponent, reactive, toRefs} from "vue";
-import {getTaskNo} from "../intergration/getNowTime"
+import {getTaskNo} from "../intergration/getTaksNo"
 
 export default defineComponent({
   name: "Home",
