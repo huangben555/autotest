@@ -1,10 +1,11 @@
 <template>
   <div style="margin-top: 25px">
     <div v-for="(item, index) in arrayData" :key="index">
-      <el-input v-model="item.table" style="margin-left: 20px; width: 200px"></el-input>
+      <el-input v-model="item.table" style="margin-left: 20px; width: 200px;"></el-input>
       <el-select v-model="item.menu" placeholder="请选择" style="margin-left: 20px">
         <el-option v-for="(item, index) in menus" :key="index" :label="item.label" :value="item.value"></el-option>
       </el-select>
+      <el-checkbox style="margin-left: 20px;" v-model="item.checked">是否删除旧数据</el-checkbox>
       <el-button style="margin-left: 20px; margin-top: 1px" type="danger" v-on:click="del(index)">-</el-button>
     </div>
     <el-button style="margin-left: 400px; margin-top: 5px" type="primary" v-on:click="add">+</el-button>
@@ -28,6 +29,7 @@ export default defineComponent({
             {
               table: "",
               menu: "",
+              checked: true,
             }
           ],
           dataNum: 0
@@ -56,6 +58,8 @@ export default defineComponent({
     const add = () => {
       requestData.arrayData.push({
         table: "",
+        menu: "",
+        checked: false,
       });
     };
 
