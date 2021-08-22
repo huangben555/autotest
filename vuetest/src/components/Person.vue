@@ -36,10 +36,14 @@ export default defineComponent({
 
     const submit = async() => {
       requestData.taskNo = getTaskNo();
-      if (!dataRules.value) return;
-      await dataRules.value.validate((valid) => {
-        console.log(valid)
-      })
+      if (!dataRules.value) {
+        console.log("Validation Success!")
+      }
+      else {
+        await dataRules.value.validate((valid) => {
+        console.log(1, valid)
+      });
+      }
       // $this.ref.requestData.validate((valid) => {
       //   if (valid) {
       //     console.log(formName);
