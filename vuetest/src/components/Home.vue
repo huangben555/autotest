@@ -29,7 +29,7 @@ export default defineComponent({
             {
               table: "",
               menu: "",
-              checked: true,
+              checked: false,
             }
           ],
           dataNum: 0

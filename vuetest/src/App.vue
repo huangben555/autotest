@@ -9,6 +9,9 @@
     <li>
       <router-link to="/Person">Person</router-link>
     </li>
+    <li>
+      <router-link to="/Logger">Logger</router-link>
+    </li>
   </ul>
   <router-view></router-view>
   <!--  <router-view v-slot="{ Component }">-->
