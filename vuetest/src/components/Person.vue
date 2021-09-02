@@ -1,5 +1,5 @@
 <template>
-  <el-form style="margin-top: 25px" :rules="dataRules" :model="requestData" ref="loginFormRef" label-width="75px">
+  <el-form style="margin-top: 25px" :rules="dataRules" :model="requestData" ref="personFormRef" label-width="75px">
     <el-form-item label="单号" prop="applyNo">
       <el-input style="width: 500px" placeholder="输入申请号" v-model="requestData.applyNo"></el-input>
     </el-form-item>
@@ -21,7 +21,7 @@ export default defineComponent({
   setup() {
     const doApplyInfo = useStore();
 
-    const loginFormRef = ref();
+    const personFormRef = ref();
 
     const requestData = reactive({
       applyNo: doApplyInfo.state.applyNo,
@@ -34,35 +34,32 @@ export default defineComponent({
       ],
     });
 
-    const submit = async() => {
+    const submit = () => {
       requestData.taskNo = getTaskNo();
-      if (!dataRules.value) {
-        console.log("Validation Success!")
-      }
-      else {
-        await dataRules.value.validate((valid) => {
-        console.log(1, valid)
-      });
-      }
-      // $this.ref.requestData.validate((valid) => {
-      //   if (valid) {
-      //     console.log(formName);
-      //   } else {
-      //     console.log("error");
-      //   }
-      // });
+      personFormRef.value.validate((valid) => {
+        if (valid) {
+          console.log("Validation Success!")
+        } else {
+          console.log("Validation Error!")
+        }
+      })
+    };
+
+    const resetForm = () => {
+      personFormRef.value.resetFields();
     };
 
     const changeApplyInfo = () => {
       doApplyInfo.commit("setData", requestData.applyNo);
-    }
+    };
 
     return {
       requestData,
       submit,
       changeApplyInfo,
       dataRules,
-      loginFormRef,
+      personFormRef,
+      resetForm,
     };
   }
 })
