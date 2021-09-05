@@ -7,10 +7,7 @@
       <router-link to="/Login">Login</router-link>
     </li>
     <li>
-      <router-link to="/Person">Person</router-link>
-    </li>
-    <li>
-      <router-link to="/Logger">Logger</router-link>
+      <router-link to="/Logger">Person</router-link>
     </li>
   </ul>
   <router-view></router-view>
