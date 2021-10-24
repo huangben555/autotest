@@ -1,5 +1,5 @@
 <template>
-  <el-form style="margin-top: 25px" :rules="dataRules" :model="requestData" ref="personFormRef" label-width="75px">
+  <el-form style="margin-top: 25px" :rules="dataRules" :model="requestData" ref="loggerFormRef" label-width="75px">
     <el-form-item label="单号" prop="applyNo">
       <el-input style="width: 500px" placeholder="输入申请号" v-model="requestData.applyNo"></el-input>
     </el-form-item>
@@ -26,7 +26,7 @@ export default defineComponent({
   setup() {
     const doApplyInfo = useStore();
 
-    const personFormRef = ref();
+    const loggerFormRef = ref();
 
     const requestData = reactive({
       applyNo: doApplyInfo.state.applyNo,
@@ -56,7 +56,7 @@ export default defineComponent({
     });
 
     const submit = () => {
-      personFormRef.value.validate((valid) => {
+      loggerFormRef.value.validate((valid) => {
         if (valid) {
           console.log("Validation Success!");
           Status.buttonLoading = true;
@@ -82,7 +82,7 @@ export default defineComponent({
     };
 
     const resetForm = () => {
-      personFormRef.value.resetFields();
+      loggerFormRef.value.resetFields();
     };
 
     const changeApplyInfo = () => {
@@ -98,7 +98,7 @@ export default defineComponent({
       submit,
       changeApplyInfo,
       dataRules,
-      personFormRef,
+      loggerFormRef,
       resetForm,
       Status,
       responseData,
